@@ -1,0 +1,129 @@
+---
+title: AI Agent Builder
+description: Create intelligent automation agents with n8n
+---
+
+## Overview
+
+Avallon's AI Agent Builder integrates with n8n to create intelligent automation agents. Build workflows that can handle complex tasks automatically.
+
+## What are AI Agents?
+
+AI Agents are automated workflows powered by n8n that can:
+
+- Process data automatically
+- Make decisions based on conditions
+- Integrate with external services
+- Handle repetitive tasks
+- Respond to events and triggers
+
+## Creating an Agent
+
+1. Go to **Dashboard** → **Agent Builder**
+2. Click "Create New Agent"
+3. Describe what you want your agent to do
+4. Configure agent settings:
+   - **Name**: Give your agent a name
+   - **Description**: What the agent does
+   - **Triggers**: When the agent should run
+   - **Actions**: What the agent should do
+5. Click "Create Agent"
+6. The agent will be created in n8n
+
+## Agent Configuration
+
+<CardGroup cols={2}>
+  <Card title="Triggers">
+    - Webhook triggers
+    - Schedule triggers
+    - Event-based triggers
+    - Manual triggers
+  </Card>
+  <Card title="Actions">
+    - API calls
+    - Data processing
+    - Notifications
+    - Database operations
+  </Card>
+  <Card title="Conditions">
+    - If/then logic
+    - Data filtering
+    - Conditional routing
+    - Error handling
+  </Card>
+  <Card title="Integrations">
+    - Email services
+    - Cloud storage
+    - CRM systems
+    - Custom APIs
+  </Card>
+</CardGroup>
+
+## Example Agents
+
+<AccordionGroup>
+  <Accordion title="Form Submission Handler">
+    Automatically processes form submissions, sends confirmation emails, and stores data in a database.
+  </Accordion>
+  <Accordion title="Content Scheduler">
+    Automatically publishes content on a schedule, posts to social media, and sends notifications.
+  </Accordion>
+  <Accordion title="Data Sync Agent">
+    Syncs data between different services, updates records, and handles conflicts.
+  </Accordion>
+</AccordionGroup>
+
+## Managing Agents
+
+### View Agents
+
+- All agents are listed in the Agent Builder dashboard
+- See agent status (active, paused, error)
+- View last run time and results
+
+### Edit Agents
+
+1. Click on an agent to open it
+2. Edit the workflow in n8n
+3. Save changes
+4. Test the agent
+
+### Delete Agents
+
+1. Select the agent
+2. Click "Delete"
+3. Confirm deletion
+
+<Warning>
+Deleting an agent cannot be undone. Make sure you want to delete it before confirming.
+</Warning>
+
+## n8n Integration
+
+Avallon integrates with n8n for agent management:
+
+- Agents are created as n8n workflows
+- You can edit agents directly in n8n
+- n8n provides advanced workflow capabilities
+- Full access to n8n's node library
+
+<Info>
+You'll need an n8n account to create and manage agents. Avallon handles the setup automatically.
+</Info>
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Start Simple">
+    Begin with simple agents and gradually add complexity
+  </Accordion>
+  <Accordion title="Test Thoroughly">
+    Always test agents before deploying to production
+  </Accordion>
+  <Accordion title="Monitor Performance">
+    Check agent logs regularly to ensure they're working correctly
+  </Accordion>
+  <Accordion title="Handle Errors">
+    Add error handling to your agents to prevent failures
+  </Accordion>
+</AccordionGroup>

@@ -1,0 +1,86 @@
+---
+title: Modify Website
+description: Modify an existing website using AI
+---
+
+## Endpoint
+
+```http
+POST /api/sites/modify
+```
+
+## Request
+
+<RequestExample>
+```bash
+curl -X POST https://beta-avallon.onrender.com/api/sites/modify \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "siteId": "1234567890",
+    "message": "Add a testimonial section with 3 customer reviews",
+    "currentCode": {
+      "index.html": "<!DOCTYPE html>..."
+    }
+  }'
+```
+</RequestExample>
+
+### Request Body
+
+<ParamField body="siteId" type="string" required>
+  ID of the website to modify
+</ParamField>
+
+<ParamField body="message" type="string" required>
+  Description of the modification you want
+</ParamField>
+
+<ParamField body="currentCode" type="object">
+  Current website content (optional, will be fetched if not provided)
+</ParamField>
+
+<ParamField body="chatHistory" type="array">
+  Previous conversation history for context
+</ParamField>
+
+## Response
+
+<ResponseField name="success" type="boolean">
+  Whether the modification was successful
+</ResponseField>
+
+<ResponseField name="websiteContent" type="object">
+  Updated website content with modifications applied
+</ResponseField>
+
+<ResponseField name="message" type="string">
+  Description of what was changed
+</ResponseField>
+
+### Example Response
+
+```json
+{
+  "success": true,
+  "websiteContent": {
+    "index.html": "<!DOCTYPE html>...",
+    "about.html": "<!DOCTYPE html>..."
+  },
+  "message": "Added testimonial section with 3 customer reviews"
+}
+```
+
+## Credits
+
+This endpoint uses **1 credit** per modification.
+
+## Errors
+
+<ResponseField name="error" type="string">
+  Error message if modification fails
+</ResponseField>
+
+<ResponseField name="code" type="string">
+  Error code
+</ResponseField>

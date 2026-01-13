@@ -1,0 +1,122 @@
+---
+title: Custom Domains
+description: Connect your own domain to your Avallon site
+---
+
+## Overview
+
+Connect your own domain name to your Avallon website. This allows you to host your site on your own custom domain instead of the default preview URL.
+
+## Setting Up a Custom Domain
+
+### Step 1: Add Your Domain
+
+1. Go to **Settings** → **Custom Domains**
+2. Click "Add Domain"
+3. Enter your domain name (e.g., `example.com`)
+4. Click "Add Domain"
+
+### Step 2: Configure DNS
+
+Avallon will generate DNS records for you:
+
+- **A Record**: For the root domain (example.com)
+- **CNAME Record**: For the www subdomain (www.example.com)
+
+<CardGroup cols={2}>
+  <Card title="A Record">
+    ```
+    Type: A
+    Name: @
+    Value: [Avallon IP Address]
+    TTL: 3600
+    ```
+  </Card>
+  <Card title="CNAME Record">
+    ```
+    Type: CNAME
+    Name: www
+    Value: [Avallon Host]
+    TTL: 3600
+    ```
+  </Card>
+</CardGroup>
+
+### Step 3: Add DNS Records
+
+1. Log in to your domain registrar (Namecheap, GoDaddy, etc.)
+2. Go to DNS management
+3. Add the A record for the root domain
+4. Add the CNAME record for www
+5. Wait for DNS propagation (usually 5-30 minutes)
+
+### Step 4: Verify DNS
+
+1. Return to Avallon Settings
+2. Click "Verify DNS" next to your domain
+3. Avallon will check if the DNS records are configured correctly
+4. Once verified, your domain status will change to "Active"
+
+## DNS Verification
+
+Avallon uses Google's DNS-over-HTTPS API to verify your DNS records. The verification checks:
+
+- A record points to the correct IP
+- CNAME record points to the correct host
+- Records are properly configured
+
+<Info>
+DNS changes can take up to 48 hours to propagate globally, though most changes take effect within minutes.
+</Info>
+
+## Domain Status
+
+Your domain can have the following statuses:
+
+<CardGroup cols={2}>
+  <Card title="Pending">
+    Domain added but DNS not yet configured
+  </Card>
+  <Card title="Verifying">
+    DNS verification in progress
+  </Card>
+  <Card title="Active">
+    DNS configured correctly, domain is live
+  </Card>
+  <Card title="Error">
+    DNS configuration issue, check your records
+  </Card>
+</CardGroup>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="DNS Not Verifying">
+    - Wait 5-30 minutes after adding DNS records
+    - Double-check the DNS record values match exactly
+    - Ensure TTL is set correctly
+    - Try clearing your DNS cache
+  </Accordion>
+  <Accordion title="Domain Not Loading">
+    - Verify DNS records are correct
+    - Check domain status in Avallon
+    - Ensure domain is connected to the correct site
+    - Contact support if issues persist
+  </Accordion>
+  <Accordion title="SSL Certificate">
+    Avallon automatically provisions SSL certificates for verified domains. This may take a few minutes after DNS verification.
+  </Accordion>
+</AccordionGroup>
+
+## Multiple Domains
+
+You can connect multiple domains to the same site:
+
+1. Add each domain in Settings
+2. Configure DNS for each domain
+3. Verify each domain separately
+4. All domains will point to the same site
+
+<Warning>
+Each domain must have its own DNS records configured. You cannot reuse the same records for multiple domains.
+</Warning>

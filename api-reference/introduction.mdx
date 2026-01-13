@@ -1,33 +1,116 @@
 ---
-title: 'Introduction'
-description: 'Example section for showcasing API endpoints'
+title: API Introduction
+description: Learn how to use the Avallon API
 ---
 
-<Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
-</Note>
+## Overview
 
-## Welcome
+The Avallon API allows you to programmatically create, modify, and manage websites. Use the API to integrate Avallon into your applications or automate website creation.
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
+## Base URL
 
-<Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
->
-  View the OpenAPI specification file
-</Card>
+```
+Production: https://beta-avallon.onrender.com
+Development: http://localhost:3000
+```
 
 ## Authentication
 
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
+All API requests require authentication using Firebase tokens:
+
+```bash
+Authorization: Bearer <firebase_token>
+```
+
+### Getting a Token
+
+1. Sign in to Avallon
+2. Get your Firebase token from localStorage: `firebase_token`
+3. Include it in the Authorization header
+
+## Rate Limits
+
+- **Free Plan**: 10 requests per minute
+- **Starter Plan**: 50 requests per minute
+- **Growth Plan**: 100 requests per minute
+
+## Response Format
+
+All API responses follow this format:
 
 ```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
+{
+  "success": true,
+  "data": { ... },
+  "message": "Operation successful"
+}
 ```
+
+### Error Response
+
+```json
+{
+  "success": false,
+  "error": "Error message",
+  "code": "ERROR_CODE"
+}
+```
+
+## Status Codes
+
+<CardGroup cols={2}>
+  <Card title="200 OK">
+    Request successful
+  </Card>
+  <Card title="201 Created">
+    Resource created successfully
+  </Card>
+  <Card title="400 Bad Request">
+    Invalid request parameters
+  </Card>
+  <Card title="401 Unauthorized">
+    Missing or invalid authentication
+  </Card>
+  <Card title="402 Payment Required">
+    Insufficient credits
+  </Card>
+  <Card title="404 Not Found">
+    Resource not found
+  </Card>
+  <Card title="500 Server Error">
+    Internal server error
+  </Card>
+</CardGroup>
+
+## Endpoints
+
+<CardGroup cols={2}>
+  <Card title="Generate Website" href="/api-reference/endpoint/generate">
+    Create a new website from a description
+  </Card>
+  <Card title="Modify Website" href="/api-reference/endpoint/modify">
+    Modify an existing website using AI
+  </Card>
+  <Card title="Import Website" href="/api-reference/endpoint/import">
+    Import an existing website
+  </Card>
+  <Card title="Deploy Website" href="/api-reference/endpoint/deploy">
+    Deploy a website to production
+  </Card>
+</CardGroup>
+
+## SDKs
+
+Currently, Avallon provides a REST API. SDKs for popular languages are coming soon:
+
+- JavaScript/TypeScript
+- Python
+- Ruby
+- PHP
+
+## Support
+
+For API support:
+
+- Email: support@avallon.ca
+- GitHub: [Issues](https://github.com/alixjaffar/Beta_Avallon/issues)

@@ -1,0 +1,93 @@
+---
+title: Website Import
+description: Import existing websites into Avallon
+---
+
+## Overview
+
+Avallon's website import feature allows you to import existing websites with full CSS, images, fonts, and multi-page support. Perfect for migrating or redesigning existing sites.
+
+## How to Import
+
+1. Open your website in the editor
+2. Click the "Import" button in the top navigation
+3. Enter the URL of the website you want to import
+4. Configure import options:
+   - **Download Images**: Embed images as data URIs
+   - **Download Fonts**: Download and embed custom fonts
+   - **Force Render**: Wait for JavaScript to render content
+   - **Max Pages**: Limit number of pages to crawl
+   - **Max Depth**: Limit crawling depth
+5. Click "Import Website"
+6. Wait for the import to complete
+
+## Import Options
+
+<CardGroup cols={2}>
+  <Card title="Download Images">
+    Converts all images to embedded data URIs, making your site self-contained.
+  </Card>
+  <Card title="Download Fonts">
+    Downloads and embeds custom fonts for offline use.
+  </Card>
+  <Card title="Force Render">
+    Waits for JavaScript to render content before capturing.
+  </Card>
+  <Card title="Multi-Page Crawling">
+    Automatically crawls and imports multiple pages from the same site.
+  </Card>
+</CardGroup>
+
+## Multi-Page Import
+
+When importing a multi-page website:
+
+1. Avallon automatically discovers internal links
+2. Crawls pages using breadth-first search
+3. Rewrites links to work within Avallon
+4. Preserves navigation structure
+
+### Page Limits
+
+- **Max Pages**: Set how many pages to import (default: 10)
+- **Max Depth**: Set how many link levels to follow (default: 3)
+
+<Warning>
+Importing many pages or deep sites may take longer and use more credits.
+</Warning>
+
+## After Import
+
+Once imported, you can:
+
+- **Edit Visually**: Use the visual editor to modify the imported site
+- **Use AI Assist**: Ask for modifications using natural language
+- **Add Pages**: Create new pages and link them
+- **Publish**: Deploy your imported and edited site
+
+## Navigation
+
+Imported multi-page sites automatically have working navigation:
+
+- Internal links redirect to scraped pages within Avallon
+- Buttons with navigation work correctly
+- Forms submit to the correct pages
+- All links are rewritten to work in the editor
+
+<Info>
+The import process preserves all CSS styles, images, and functionality while making the site editable in Avallon.
+</Info>
+
+## Tips
+
+<AccordionGroup>
+  <Accordion title="Start Small">
+    For your first import, try a simple single-page site to understand the process.
+  </Accordion>
+  <Accordion title="Check Results">
+    Review the imported pages to ensure all content was captured correctly.
+  </Accordion>
+  <Accordion title="Edit After Import">
+    Use the visual editor or AI Assist to customize the imported site to your needs.
+  </Accordion>
+</AccordionGroup>

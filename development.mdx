@@ -1,94 +1,140 @@
 ---
-title: 'Development'
-description: 'Preview changes locally to update your docs'
+title: Development
+description: Set up Avallon for local development
 ---
 
-<Info>
-  **Prerequisites**:
-  - Node.js version 19 or higher
-  - A docs repository with a `docs.json` file
-</Info>
+## Prerequisites
 
-Follow these steps to install and run Mintlify on your operating system.
+- Node.js 18+ and npm
+- PostgreSQL database
+- Firebase project
+- Google Cloud credentials (for Vertex AI)
 
-<Steps>
-<Step title="Install the Mintlify CLI">
+## Installation
 
-```bash
-npm i -g mint
-```
-</Step>
-
-<Step title="Preview locally">
-
-Navigate to your docs directory where your `docs.json` file is located, and run the following command:
+### Clone the Repository
 
 ```bash
-mint dev
+git clone https://github.com/alixjaffar/Beta_Avallon.git
+cd Beta_Avallon
 ```
 
-A local preview of your documentation will be available at `http://localhost:3000`.
-
-</Step>
-</Steps>
-
-## Custom ports
-
-By default, Mintlify uses port 3000. You can customize the port Mintlify runs on by using the `--port` flag. For example, to run Mintlify on port 3333, use this command:
+### Install Dependencies
 
 ```bash
-mint dev --port 3333
+# Install root dependencies
+npm install
+
+# Install backend dependencies
+cd backend
+npm install
+
+# Install frontend dependencies
+cd ../frontend
+npm install
 ```
 
-If you attempt to run Mintlify on a port that's already in use, it will use the next available port:
+## Environment Setup
 
-```md
-Port 3000 is already in use. Trying 3001 instead.
+### Backend Environment
+
+Create `backend/.env`:
+
+```env
+DATABASE_URL="postgresql://user:password@localhost:5432/avallon"
+NEXT_PUBLIC_FIREBASE_API_KEY="your-firebase-key"
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN="your-auth-domain"
+NEXT_PUBLIC_FIREBASE_PROJECT_ID="your-project-id"
+GOOGLE_APPLICATION_CREDENTIALS="./credentials/vertex-ai-service-account.json"
 ```
 
-## Mintlify versions
+### Frontend Environment
 
-Please note that each CLI release is associated with a specific version of Mintlify. If your local preview does not align with the production version, please update the CLI:
+Create `frontend/.env`:
+
+```env
+VITE_API_URL="http://localhost:3000"
+VITE_FIREBASE_API_KEY="your-firebase-key"
+VITE_FIREBASE_AUTH_DOMAIN="your-auth-domain"
+VITE_FIREBASE_PROJECT_ID="your-project-id"
+```
+
+## Database Setup
+
+### Run Migrations
 
 ```bash
-npm mint update
+cd backend
+npx prisma migrate dev
 ```
 
-## Validating links
-
-The CLI can assist with validating links in your documentation. To identify any broken links, use the following command:
+### Generate Prisma Client
 
 ```bash
-mint broken-links
+npx prisma generate
 ```
 
-## Deployment
+## Running the Application
 
-If the deployment is successful, you should see the following:
+### Start Backend
 
-<Frame>
-  <img src="/images/checks-passed.png" alt="Screenshot of a deployment confirmation message that says All checks have passed." style={{ borderRadius: '0.5rem' }} />
-</Frame>
+```bash
+cd backend
+npm run dev
+```
 
-## Code formatting
+Backend runs on `http://localhost:3000`
 
-We suggest using extensions on your IDE to recognize and format MDX. If you're a VSCode user, consider the [MDX VSCode extension](https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx) for syntax highlighting, and [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) for code formatting.
+### Start Frontend
 
-## Troubleshooting
+```bash
+cd frontend
+npm run dev
+```
+
+Frontend runs on `http://localhost:5173`
+
+## Project Structure
+
+```
+Beta_Avallon/
+├── backend/          # Next.js API backend
+│   ├── src/
+│   │   ├── app/      # API routes
+│   │   └── lib/      # Utilities and generators
+│   └── prisma/       # Database schema
+├── frontend/         # React frontend
+│   └── src/
+│       ├── components/
+│       ├── pages/
+│       └── lib/
+└── shared/           # Shared types and utilities
+```
+
+## Development Tips
 
 <AccordionGroup>
-  <Accordion title='Error: Could not load the "sharp" module using the darwin-arm64 runtime'>
-
-    This may be due to an outdated version of node. Try the following:
-    1. Remove the currently-installed version of the CLI: `npm remove -g mint`
-    2. Upgrade to Node v19 or higher.
-    3. Reinstall the CLI: `npm i -g mint`
+  <Accordion title="Hot Reload">
+    Both frontend and backend support hot reload. Changes are reflected immediately.
   </Accordion>
-
-  <Accordion title="Issue: Encountering an unknown error">
-  
-    Solution: Go to the root of your device and delete the `~/.mintlify` folder. Then run `mint dev` again.
+  <Accordion title="Database Changes">
+    Use Prisma migrations for database changes. Never edit the database directly.
+  </Accordion>
+  <Accordion title="API Testing">
+    Use the API routes directly or test with curl/Postman.
+  </Accordion>
+  <Accordion title="Debugging">
+    Check browser console for frontend errors and terminal for backend errors.
   </Accordion>
 </AccordionGroup>
 
-Curious about what changed in the latest CLI version? Check out the [CLI changelog](https://www.npmjs.com/package/mintlify?activeTab=versions).
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Submit a pull request
+
+<Info>
+For more information, see the [GitHub repository](https://github.com/alixjaffar/Beta_Avallon).
+</Info>

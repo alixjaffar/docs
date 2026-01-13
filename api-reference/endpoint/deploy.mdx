@@ -1,0 +1,64 @@
+---
+title: Deploy Website
+description: Deploy a website to production
+---
+
+## Endpoint
+
+```http
+POST /api/sites/{siteId}/deploy
+```
+
+## Request
+
+<RequestExample>
+```bash
+curl -X POST https://beta-avallon.onrender.com/api/sites/1234567890/deploy \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json"
+```
+</RequestExample>
+
+### Path Parameters
+
+<ParamField path="siteId" type="string" required>
+  ID of the website to deploy
+</ParamField>
+
+## Response
+
+<ResponseField name="success" type="boolean">
+  Whether the deployment was successful
+</ResponseField>
+
+<ResponseField name="previewUrl" type="string">
+  URL where the website is deployed
+</ResponseField>
+
+<ResponseField name="deploymentId" type="string">
+  ID of the deployment
+</ResponseField>
+
+### Example Response
+
+```json
+{
+  "success": true,
+  "previewUrl": "https://preview.avallon.site/website-1234567890",
+  "deploymentId": "deploy-1234567890"
+}
+```
+
+## Credits
+
+This endpoint uses **0 credits** (free).
+
+## Errors
+
+<ResponseField name="error" type="string">
+  Error message if deployment fails
+</ResponseField>
+
+<ResponseField name="code" type="string">
+  Error code
+</ResponseField>

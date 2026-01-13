@@ -1,0 +1,102 @@
+---
+title: Import Website
+description: Import an existing website
+---
+
+## Endpoint
+
+```http
+POST /api/sites/mirror
+```
+
+## Request
+
+<RequestExample>
+```bash
+curl -X POST https://beta-avallon.onrender.com/api/sites/mirror \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "url": "https://example.com",
+    "downloadImages": true,
+    "downloadFonts": true,
+    "maxPages": 10,
+    "maxDepth": 3
+  }'
+```
+</RequestExample>
+
+### Request Body
+
+<ParamField body="url" type="string" required>
+  URL of the website to import
+</ParamField>
+
+<ParamField body="downloadImages" type="boolean">
+  Whether to download and embed images (default: true)
+</ParamField>
+
+<ParamField body="downloadFonts" type="boolean">
+  Whether to download and embed fonts (default: true)
+</ParamField>
+
+<ParamField body="forceRender" type="boolean">
+  Wait for JavaScript to render before capturing (default: false)
+</ParamField>
+
+<ParamField body="maxPages" type="number">
+  Maximum number of pages to import (default: 10)
+</ParamField>
+
+<ParamField body="maxDepth" type="number">
+  Maximum crawling depth (default: 3)
+</ParamField>
+
+## Response
+
+<ResponseField name="success" type="boolean">
+  Whether the import was successful
+</ResponseField>
+
+<ResponseField name="pages" type="array">
+  Array of imported pages with HTML content
+</ResponseField>
+
+<ResponseField name="siteId" type="string">
+  ID of the created website
+</ResponseField>
+
+### Example Response
+
+```json
+{
+  "success": true,
+  "pages": [
+    {
+      "filename": "index.html",
+      "html": "<!DOCTYPE html>...",
+      "title": "Home Page"
+    },
+    {
+      "filename": "about.html",
+      "html": "<!DOCTYPE html>...",
+      "title": "About"
+    }
+  ],
+  "siteId": "1234567890"
+}
+```
+
+## Credits
+
+This endpoint uses **1 credit** per import.
+
+## Errors
+
+<ResponseField name="error" type="string">
+  Error message if import fails
+</ResponseField>
+
+<ResponseField name="code" type="string">
+  Error code (e.g., "INVALID_URL", "IMPORT_FAILED")
+</ResponseField>

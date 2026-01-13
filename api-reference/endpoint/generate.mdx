@@ -1,0 +1,99 @@
+---
+title: Generate Website
+description: Create a new website from a description
+---
+
+## Endpoint
+
+```http
+POST /api/sites/generate
+```
+
+## Request
+
+<RequestExample>
+```bash
+curl -X POST https://beta-avallon.onrender.com/api/sites/generate \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "My Website",
+    "description": "A modern portfolio website for a photographer",
+    "mode": "full",
+    "multiPage": true
+  }'
+```
+</RequestExample>
+
+### Request Body
+
+<ParamField body="name" type="string" required>
+  Name of the website
+</ParamField>
+
+<ParamField body="description" type="string" required>
+  Description of what you want to build
+</ParamField>
+
+<ParamField body="mode" type="string">
+  Generation mode: "full" (default) or "minimal"
+</ParamField>
+
+<ParamField body="multiPage" type="boolean">
+  Whether to generate multiple pages (default: true)
+</ParamField>
+
+<ParamField body="style" type="string">
+  Design style: "modern", "minimal", "bold", etc.
+</ParamField>
+
+<ParamField body="colorScheme" type="string">
+  Color scheme preferences
+</ParamField>
+
+## Response
+
+<ResponseField name="success" type="boolean">
+  Whether the request was successful
+</ResponseField>
+
+<ResponseField name="websiteContent" type="object">
+  Object containing HTML files (key: filename, value: HTML content)
+</ResponseField>
+
+<ResponseField name="siteId" type="string">
+  ID of the created website
+</ResponseField>
+
+<ResponseField name="previewUrl" type="string">
+  Preview URL for the generated website
+</ResponseField>
+
+### Example Response
+
+```json
+{
+  "success": true,
+  "websiteContent": {
+    "index.html": "<!DOCTYPE html>...",
+    "about.html": "<!DOCTYPE html>...",
+    "contact.html": "<!DOCTYPE html>..."
+  },
+  "siteId": "1234567890",
+  "previewUrl": "https://preview.avallon.site/website-1234567890"
+}
+```
+
+## Credits
+
+This endpoint uses **1 credit** per website generation.
+
+## Errors
+
+<ResponseField name="error" type="string">
+  Error message if generation fails
+</ResponseField>
+
+<ResponseField name="code" type="string">
+  Error code (e.g., "INSUFFICIENT_CREDITS", "GENERATION_FAILED")
+</ResponseField>
